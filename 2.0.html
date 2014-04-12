@@ -1,4 +1,4 @@
-<!-- Fullkorn version 1.5 -->
+<!-- Fullkorn version 2.0 -->
 <!-- Created by John Ankarström -->
 <html>
 <head>
@@ -11,8 +11,6 @@
     <meta name="text:Google Fonts font sizes" content="400italic,700italic,400,700">
     <meta name="text:Local font which overrides Google Fonts font" content="">
     <meta name="text:Footer text" content="">
-    <meta name="text:Subtitle p1" content="">
-    <meta name="text:Subtitle p2" content="">
     <meta name="text:Disqus shortname" content="">
     
     <link rel="icon" href="{Favicon}">
@@ -20,6 +18,25 @@
     <link rel="alternate" type="application/rss+xml" href="/rss">
     <link href="http://fonts.googleapis.com/css?family={text:Google Fonts font}:{text:Google Fonts font sizes}" rel="stylesheet" type="text/css">
     <style type="text/css">
+
+        @media all and (max-width: 900px) {
+            #main_header {
+               font-size: 20px;
+               border-bottom: 1px solid #dfdfdf;
+               text-align: center;
+               max-width: 100% !important;
+               background: none !important;
+               padding: 0 0 24px 0 !important;
+               height: auto !important;
+               position: relative !important;
+               top: 0 !important;
+               left: 0 !important;
+            }
+            #wrapper {
+                margin: 0 auto !important;
+            }
+        }
+
         *:not(pre|code) {
             -webkit-font-smoothing: subpixel-antialiased;
         }
@@ -37,7 +54,7 @@
         }
         #wrapper {
             max-width: 500px;
-            margin: 0 auto;
+            margin: -24px auto 0 auto;
             padding: 24px 48px;
         }
         h1,h2,h3,h4,h5,h6 {
@@ -89,35 +106,30 @@
         /* Header */
         
         #main_header {
-            font-size: 20px;
-            padding-bottom: 24px;
-            border-bottom: 1px solid #dfdfdf;
-            text-align: center;
-        }
-        #title, .subtitle {
-            font-family: Vollkorn, Georgia, "Times New Roman", Times, serif;
+            max-width: 150px;
+            background: rgba(246, 246, 246, 0.8);
+            padding: 20px;
+            height: 100%;
+            position: fixed;
+            top: 0;
+            left: 0;
         }
         #title {
             font-weight: normal;
-            display: inline;
             line-height: 1.2;
             margin-bottom: 4px;
-            font-size: 60px;
+            font-size: 30px;
         }
         #title a {
             color: inherit;
             text-decoration: inherit;
-        }
-        .subtitle {
-            font-style: italic;
-            position: relative;
-            top: -9px;
         }
         
         /* Navigation */
         
         #main_nav a {
             font-variant: small-caps;
+            display: block;
         }
         
         /* Posts */
@@ -125,6 +137,7 @@
         .tag_title {
             padding-top: 24px;
             text-transform: capitalize;
+            text-align: center;
         }
         .post {
             padding-top: 24px;
@@ -255,15 +268,12 @@
 <body class=" {block:PermalinkPage}permalinkpage{/block:PermalinkPage} {block:IndexPage}indexpage{/block:IndexPage} {block:TagPage}tagpage{/block:TagPage} ">
 <div id="wrapper">
     <header id="main_header">
-        <span class="subtitle">{Text:Subtitle p1}</span>
         <h1 id="title"><a href="/">{Title}</a></h1>
-        <span class="subtitle">{Text:Subtitle p2}</span>
         <nav id="main_nav">
             {block:IfShowPages}
-                &nbsp;&nbsp;
                 {block:HasPages}
                     {block:Pages}
-                        <a href="{URL}">{Label}</a>&nbsp;&nbsp;
+                        <a href="{URL}">{Label}</a>
                     {/block:Pages}
                 {/block:HasPages}
             {/block:IfShowPages}
@@ -345,7 +355,7 @@
                 <header class="post_header">
                     {block:Photos}
                         <p class="post_image">{LinkOpenTag}<img src="{PhotoURL-1280}" alt="{PhotoAlt}">{LinkCloseTag}</p>
-	                {/block:Photos}
+                    {/block:Photos}
                     <span class="post_time"><time datetime="{Year}-{MonthNumberWithZero}-{DayOfMonthWithZero}">{Month} {DayOfMonth}, {Year}</time></span>
                 </header>
                 <div class="post_content">

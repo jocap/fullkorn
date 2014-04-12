@@ -1,0 +1,518 @@
+<!-- Fullkorn version 1.5 -->
+<!-- Created by John Ankarström -->
+<html>
+<head>
+    <title>{block:PostTitle}{PostTitle} - {/block:PostTitle}{block:TagPage}{Tag} - {/block:TagPage}{Title}</title>
+    <meta charset="utf-8">
+    <meta name="description" content="{MetaDescription}">
+    <meta name="if:Show pages" content="1"/>
+    <meta name="text:Font size" content="16px">
+    <meta name="text:Google Fonts font" content="Vollkorn">
+    <meta name="text:Google Fonts font sizes" content="400italic,700italic,400,700">
+    <meta name="text:Local font which overrides Google Fonts font" content="">
+    <meta name="text:Footer text" content="">
+    <meta name="text:Subtitle p1" content="">
+    <meta name="text:Subtitle p2" content="">
+    <meta name="text:Disqus shortname" content="">
+    
+    <link rel="icon" href="{Favicon}">
+    <link rel="shortcut icon" href="{Favicon}">
+    <link rel="alternate" type="application/rss+xml" href="http://feeds.feedburner.com/johnaj?format=xml">
+    <link href="http://fonts.googleapis.com/css?family={text:Google Fonts font}:{text:Google Fonts font sizes}" rel="stylesheet" type="text/css">
+    <style type="text/css">
+        *:not(pre|code) {
+            -webkit-font-smoothing: subpixel-antialiased;
+        }
+        body {
+            font-size: {text:Font size};
+            line-height: 1.5;
+            {block:IfNotLocalFontWhichOverridesGoogleFontsFont}
+                font-family: {text:Google Fonts font}, Georgia, "Times New Roman", Times, serif;
+            {/block:IfNotLocalFontWhichOverridesGoogleFontsFont}
+            {block:IfLocalFontWhichOverridesGoogleFontsFont}
+                font-family: {text:Local font which overrides Google Fonts font};
+            {/block:IfLocalFontWhichOverridesGoogleFontsFont}
+            margin: 0;
+            background: #fdfdfd;
+        }
+        #wrapper {
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 24px 48px;
+        }
+        h1,h2,h3,h4,h5,h6 {
+            font-weight: normal;
+            margin: 0;
+        }
+        a {
+            color: #8E79B8;
+            text-decoration: none;
+        }
+        a:hover {
+            color: #8E79B8 !important;
+            background: #D9D3E6;
+        }
+        p, li {
+            margin: 0 0 12px 0;
+        }
+        blockquote {
+            background: #f6f6f6;
+            padding: 12px;
+            font-style: italic;
+            border: 4px solid #dfdfdf;
+            margin-left: 0;
+            margin-right: 0;
+        }
+        blockquote p {
+            text-align: left !important;
+        }
+        blockquote > :last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        em em, i i, blockquote em, blockquote i {
+            font-style: normal;
+        }
+        blockquote em em, blockquote i i {
+            font-style: italic;
+        }
+        .post_time time, #older, #newer, #main_nav a {
+            text-rendering: optimizeSpeed; /* small-caps */
+        }
+        hr {
+            border-style: solid;
+            border-color: #dfdfdf;
+            border-width: 1px 0 0 0;
+            margin: 24px 0 24px 0;
+        }
+        
+        /* Header */
+        
+        #main_header {
+            font-size: 20px;
+            padding-bottom: 24px;
+            border-bottom: 1px solid #dfdfdf;
+            text-align: center;
+        }
+        #title, .subtitle {
+            font-family: Vollkorn, Georgia, "Times New Roman", Times, serif;
+        }
+        #title {
+            font-weight: normal;
+            display: inline;
+            line-height: 1.2;
+            margin-bottom: 4px;
+            font-size: 60px;
+        }
+        #title a {
+            color: inherit;
+            text-decoration: inherit;
+        }
+        .subtitle {
+            font-style: italic;
+            position: relative;
+            top: -9px;
+        }
+        
+        /* Navigation */
+        
+        #main_nav a {
+            font-variant: small-caps;
+        }
+        
+        /* Posts */
+        
+        .tag_title {
+            padding-top: 24px;
+            text-transform: capitalize;
+        }
+        .post {
+            padding-top: 24px;
+            padding-bottom: 24px;
+            border-bottom: 1px solid #dfdfdf;
+        }
+        .post_image {
+            text-align: center !important;
+        }
+        .post_image img {
+            max-width: 500px;
+        }
+        .post_content img.external, .post_content img.inline {
+            width: auto !important;
+            right: 0 !important;
+        }
+        .post h4 {
+            font-size: 1.17em;
+            font-style: italic;
+        }
+        .post h5 {
+            font-size: 1em;
+            font-style: italic;
+        }
+        ul.post_chat {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        .post_video > iframe {
+            /* 16:9 format */
+            width: 600px !important;
+            height: 337.5px !important;
+        }
+        ul.post_chat li {
+            margin: 0;
+            padding: 4px 7px;
+        }
+        ul.post_chat li.chat_even {
+            background: #f0f0f0;
+        }
+        .post pre, code {
+            white-space: pre-wrap;
+            font-family: Courier, "Courier New", monospace;
+            font-size: 12px;
+        }
+        .post p {
+            text-align: justify;
+        }
+        .clear {
+            clear: both;
+        }
+        .post_header {
+            text-align: center;
+        }
+        .post_title a {
+            color: inherit;
+            text-decoration: inherit;
+        }
+        .post_time, .post_footer {
+            color: #666;
+        }
+        .post_time {
+            font-variant: small-caps;
+        }
+        .post_tags {
+            float: left;
+            width: 85%;
+        }
+        .post_notes {
+            float: left;
+            text-align: right;
+            width: 15%;
+        }
+        .post_footer {
+            display: none;
+        }
+        .post_content {
+            padding-top: 12px;
+        }
+        .post_content h1, .post_content h2, .post_content h3, .post_content h4, .post_content h5, .post_content h6 {
+            margin-bottom: 12px;
+        }
+        
+        #notes {
+            padding-top: 24px;
+            padding-bottom: 24px;
+            border-bottom: 1px solid #dfdfdf;
+        }
+        ol.notes {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        ol.notes li .action:before {
+            content: "\a0";
+        }
+        
+        /* Footer */
+        
+        #main_footer {
+            padding-top: 24px;
+        }
+        #older, #newer {
+            font-variant: small-caps;
+        }
+        #older {
+            float: left;
+        }
+        #newer {
+            float: right;
+        }
+        #main_footer p {
+            color: #666;
+            text-align: center;
+        }
+    </style>
+    <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {inlineMath: [['\\(','\\)']]},
+        SVG: {
+            font: "Latin-Modern"
+        }
+    });
+    </script>
+    <script type="text/javascript"
+  src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_SVG"></script>
+    <style type="text/css">{CustomCSS}</style>
+</head>
+<body class=" {block:PermalinkPage}permalinkpage{/block:PermalinkPage} {block:IndexPage}indexpage{/block:IndexPage} {block:TagPage}tagpage{/block:TagPage} ">
+<div id="wrapper">
+    <header id="main_header">
+        <span class="subtitle">{Text:Subtitle p1}</span>
+        <h1 id="title"><a href="/">{Title}</a></h1>
+        <span class="subtitle">{Text:Subtitle p2}</span>
+        <nav id="main_nav">
+            {block:IfShowPages}
+                &nbsp;&nbsp;
+                {block:HasPages}
+                    {block:Pages}
+                        <a href="{URL}">{Label}</a>&nbsp;&nbsp;
+                    {/block:Pages}
+                {/block:HasPages}
+            {/block:IfShowPages}
+        </nav>
+    </header>
+    <div id="posts">
+
+        {block:TagPage}<h2 class="tag_title">{Tag}</h2>{/block:TagPage}
+        {Block:Posts}
+        {block:Link}
+            <article class="post link">
+                <header class="post_header">
+                    <h2 class="post_link"><a href="{URL}" {Target}>{Name}</a></h2>
+                    
+                    <span class="post_time"><time datetime="{Year}-{MonthNumberWithZero}-{DayOfMonthWithZero}">{Month} {DayOfMonth}, {Year}</time> <a class="post_permalink" href="{Permalink}">&#9733;</a></span>
+                </header>
+                <div class="post_content">
+                    {block:Description}
+                        <p>{Description}</p>
+                    {/block:Description}
+                </div>
+                <footer class="post_footer" style="{block:HasTags}display:block;{/block:HasTags}{block:PostNotes}display:block;{/block:PostNotes}">
+                    <span class="post_tags">
+                    {block:Tags}
+                        (<a href="{TagURL}">{Tag}</a>)
+                    {/block:Tags}&nbsp;</span>
+                    <span class="post_notes"><a href="{Permalink}/#notes">{NoteCountWithLabel}</a></span>
+                </footer>
+                <div class="clear"></div>
+            </article>
+        {/block:Link}
+
+        {block:Photo}
+            <article class="post image">
+                <header class="post_header">
+                     <p class="post_image">{LinkOpenTag}<img src="{PhotoURL-1280}" alt="{PhotoAlt}">{LinkCloseTag}</p>
+                    <span class="post_time"><time datetime="{Year}-{MonthNumberWithZero}-{DayOfMonthWithZero}">{Month} {DayOfMonth}, {Year}</time></span>
+                </header>
+                <div class="post_content">
+                    {block:Caption}
+                        <p>{Caption}</p>
+                    {/block:Caption}
+                </div>
+                <footer class="post_footer" style="{block:HasTags}display:block;{/block:HasTags}{block:PostNotes}display:block;{/block:PostNotes}">
+                    <span class="post_tags">
+                    {block:Tags}
+                        (<a href="{TagURL}">{Tag}</a>)
+                    {/block:Tags}&nbsp;</span>
+                    <span class="post_notes"><a href="{Permalink}/#notes">{NoteCountWithLabel}</a></span>
+                </footer>
+                <div class="clear"></div>
+            </article>
+        {/block:Photo}
+
+        {block:Panorama}
+            <article class="post panorama">
+                <header class="post_header">
+                     <p class="post_image">{LinkOpenTag}<img src="{PhotoURL-Panorama}" alt="{PhotoAlt}">{LinkCloseTag}</p>
+                    <span class="post_time"><time datetime="{Year}-{MonthNumberWithZero}-{DayOfMonthWithZero}">{Month} {DayOfMonth}, {Year}</time></span>
+                </header>
+                <div class="post_content">
+                    {block:Caption}
+                        <p>{Caption}</p>
+                    {/block:Caption}
+                </div>
+                <footer class="post_footer" style="{block:HasTags}display:block;{/block:HasTags}{block:PostNotes}display:block;{/block:PostNotes}">
+                    <span class="post_tags">
+                    {block:Tags}
+                        (<a href="{TagURL}">{Tag}</a>)
+                    {/block:Tags}&nbsp;</span>
+                    <span class="post_notes"><a href="{Permalink}/#notes">{NoteCountWithLabel}</a></span>
+                </footer>
+                <div class="clear"></div>
+            </article>
+        {/block:Panorama}
+        
+        {block:Photoset}
+            <article class="post photoset">
+                <header class="post_header">
+                    {block:Photos}
+                        <p class="post_image">{LinkOpenTag}<img src="{PhotoURL-1280}" alt="{PhotoAlt}">{LinkCloseTag}</p>
+	                {/block:Photos}
+                    <span class="post_time"><time datetime="{Year}-{MonthNumberWithZero}-{DayOfMonthWithZero}">{Month} {DayOfMonth}, {Year}</time></span>
+                </header>
+                <div class="post_content">
+                    {block:Caption}
+                        <p>{Caption}</p>
+                    {/block:Caption}
+                </div>
+                <footer class="post_footer" style="{block:HasTags}display:block;{/block:HasTags}{block:PostNotes}display:block;{/block:PostNotes}">
+                    <span class="post_tags">
+                    {block:Tags}
+                        (<a href="{TagURL}">{Tag}</a>)
+                    {/block:Tags}&nbsp;</span>
+                    <span class="post_notes"><a href="{Permalink}/#notes">{NoteCountWithLabel}</a></span>
+                </footer>
+                <div class="clear"></div>
+            </article>
+        {/block:Photoset}
+        
+        {block:Video}
+            <article class="post video">
+                <header class="post_header">
+                     <p class="post_video">{VideoEmbed-700}</p>
+                    <span class="post_time"><time datetime="{Year}-{MonthNumberWithZero}-{DayOfMonthWithZero}">{Month} {DayOfMonth}, {Year}</time></span>
+                </header>
+                <div class="post_content">
+                    {block:Caption}
+                        <p>{Caption}</p>
+                    {/block:Caption}
+                </div>
+                <footer class="post_footer" style="{block:HasTags}display:block;{/block:HasTags}{block:PostNotes}display:block;{/block:PostNotes}">                     <span class="post_tags">
+                    {block:Tags}
+                        (<a href="{TagURL}">{Tag}</a>)
+                    {/block:Tags}&nbsp;</span>
+                    <span class="post_notes"><a href="{Permalink}/#notes">{NoteCountWithLabel}</a></span>
+                </footer>
+                <div class="clear"></div>
+            </article>
+        {/block:Video}
+        
+        {block:Audio}
+            <article class="post audio">
+                <header class="post_header">
+                     <p class="post_audio">{AudioPlayer}</p>
+                    <span class="post_time"><time datetime="{Year}-{MonthNumberWithZero}-{DayOfMonthWithZero}">{Month} {DayOfMonth}, {Year}</time></span>
+                </header>
+                <div class="post_content">
+                    {block:ExternalAudio}
+                        <small><a href="{ExternalAudioURL}">Download audio.</a></small>
+                    {/block:ExternalAudio}
+                    {block:Caption}
+                        <p>{Caption}</p>
+                    {/block:Caption}
+                </div>
+                <footer class="post_footer" style="{block:HasTags}display:block;{/block:HasTags}{block:PostNotes}display:block;{/block:PostNotes}">                     <span class="post_tags">
+                    {block:Tags}
+                        (<a href="{TagURL}">{Tag}</a>)
+                    {/block:Tags}&nbsp;</span>
+                    <span class="post_notes"><a href="{Permalink}/#notes">{NoteCountWithLabel}</a></span>
+                </footer>
+                <div class="clear"></div>
+            </article>
+        {/block:Audio}
+        
+        {block:Quote}
+            <article class="post quote">
+                <header class="post_header">
+                    <h2 class="post_quote">&ldquo;{Quote}&rdquo;{block:Source} &mdash; {Source}{/block:Source}</h2>
+                    <span class="post_time"><time datetime="{Year}-{MonthNumberWithZero}-{DayOfMonthWithZero}">{Month} {DayOfMonth}, {Year}</time></span>
+                </header>
+                <div class="post_content">
+                </div>
+                <footer class="post_footer" style="{block:HasTags}display:block;{/block:HasTags}{block:PostNotes}display:block;{/block:PostNotes}">                     <span class="post_tags">
+                    {block:Tags}
+                        (<a href="{TagURL}">{Tag}</a>)
+                    {/block:Tags}&nbsp;</span>
+                    <span class="post_notes"><a href="{Permalink}/#notes">{NoteCountWithLabel}</a></span>
+                </footer>
+                <div class="clear"></div>
+            </article>
+        {/block:Quote}
+        
+        {block:Answer}
+            <article class="post answer">
+                <header class="post_header">
+                    <span class="post_time"><time datetime="{Year}-{MonthNumberWithZero}-{DayOfMonthWithZero}">{Month} {DayOfMonth}, {Year}</time></span>
+                </header>
+                <div class="post_content">
+                    <p><i>Question from {Asker}:</i></p>
+                    <blockquote><p>{Question}</p></blockquote>
+                        <p><i>Answer:</i></p>
+                        <div class="post_answer">{Answer}</div>
+                </div>
+                <footer class="post_footer" style="{block:HasTags}display:block;{/block:HasTags}{block:PostNotes}display:block;{/block:PostNotes}">                     <span class="post_tags">
+                    {block:Tags}
+                        (<a href="{TagURL}">{Tag}</a>)
+                    {/block:Tags}&nbsp;</span>
+                    <span class="post_notes"><a href="{Permalink}/#notes">{NoteCountWithLabel}</a></span>
+                </footer>
+                <div class="clear"></div>
+            </article>
+        {/block:Answer}
+        
+        {block:Chat}
+            <article class="post chat">
+                <header class="post_header">
+                    {Block:Title}<h2 class="post_title">{Title}</h2>{/Block:Title}
+                    <span class="post_time"><time datetime="{Year}-{MonthNumberWithZero}-{DayOfMonthWithZero}">{Month} {DayOfMonth}, {Year}</time></span>
+                </header>
+                <div class="post_content">
+                    <ul class="post_chat">
+                        {block:Lines}
+                            <li class="chat_{Alt}">
+                                {Block:Label}<i>{Label}</i>&nbsp;{/Block:Label}
+                                {Line}
+                            </li>
+                        {/block:Lines}
+                    </ul>
+                </div>
+                <footer class="post_footer" style="{block:HasTags}display:block;{/block:HasTags}{block:PostNotes}display:block;{/block:PostNotes}">                     <span class="post_tags">
+                    {block:Tags}
+                        (<a href="{TagURL}">{Tag}</a>)
+                    {/block:Tags}&nbsp;</span>
+                    <span class="post_notes"><a href="{Permalink}/#notes">{NoteCountWithLabel}</a></span>
+                </footer>
+                <div class="clear"></div>
+            </article>
+        {/block:Chat}
+
+        {block:Text}
+            <article class="post text">
+                <header class="post_header">
+                    <h2 class="post_title"><a href="{Permalink}">{Title}</a></h2>
+                    {block:Date}<span class="post_time"><time datetime="{Year}-{MonthNumberWithZero}-{DayOfMonthWithZero}">{Month} {DayOfMonth}, {Year}</time></span>{/Block:Date}
+                </header>
+                <div class="post_content">
+                    {Body}
+                </div>
+                <footer class="post_footer" style="{block:HasTags}display:block;{/block:HasTags}{block:PostNotes}display:block;{/block:PostNotes}">
+                    <span class="post_tags">
+                    {block:Tags}
+                        (<a href="{TagURL}">{Tag}</a>)
+                    {/block:Tags}&nbsp;</span>
+                    <span class="post_notes"><a href="{Permalink}/#notes">{NoteCountWithLabel}</a></span>
+                </footer>
+                <div class="clear"></div>
+            </article>
+        {/block:Text}
+        {/Block:Posts}
+
+        {block:PostNotes}<section id="notes">{PostNotes}</section>{/block:PostNotes}
+
+            {block:PermalinkPage}
+                {block:IfDisqusShortname}
+                    <div class="disqus">
+                        <div id="disqus_thread"></div>
+                        <script type="text/javascript" src="http://disqus.com/forums/{text:Disqus shortname}/embed.js"></script>
+                        <noscript><a href="http://{text:Disqus shortname}.disqus.com/?url=ref">{lang:Discuss}</a></noscript>
+                    </div>
+                {/block:IfDisqusShortname}
+            {/block:PermalinkPage}
+
+    </div>
+    <footer id="main_footer">
+        {Block:NextPage}<a id="older" href="{NextPage}">{lang:Older}</a>{/Block:NextPage}
+        {Block:PreviousPage}<a id="newer" href="{PreviousPage}">{lang:Newer}</a>{/Block:PreviousPage}
+        <p>{Text:Footer text}</p>
+    </footer>
+</div>
+</body>
+</html>

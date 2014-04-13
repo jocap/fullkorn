@@ -5,7 +5,7 @@
     <title>{block:PostTitle}{PostTitle} - {/block:PostTitle}{block:TagPage}{Tag} - {/block:TagPage}{Title}</title>
     <meta charset="utf-8">
     <meta name="description" content="{MetaDescription}">
-    <meta name="viewport" content="initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+    <meta name="viewport" content="initial-scale=1, minimum-scale=1, user-scalable=yes, width=device-width">
     <meta name="if:Show pages" content="1"/>
     <meta name="text:Font size" content="16px">
     <meta name="text:Google Fonts font" content="Vollkorn">
@@ -132,6 +132,7 @@
         #main_nav a {
             font-variant: small-caps;
             display: block;
+            font-size: 18px;
         }
         
         /* Posts */
@@ -170,8 +171,8 @@
         }
         .post_video > iframe {
             /* 16:9 format */
-            width: 600px !important;
-            height: 337.5px !important;
+            width: 500px !important;
+            height: 281.25px !important;
         }
         ul.post_chat li {
             margin: 0;
@@ -255,14 +256,6 @@
             text-align: center;
         }
     </style>
-    <script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-        tex2jax: {inlineMath: [['\\(','\\)']]},
-        SVG: {
-            font: "Latin-Modern"
-        }
-    });
-    </script>
     <style type="text/css">{CustomCSS}</style>
 </head>
 <body class=" {block:PermalinkPage}permalinkpage{/block:PermalinkPage} {block:IndexPage}indexpage{/block:IndexPage} {block:TagPage}tagpage{/block:TagPage} ">

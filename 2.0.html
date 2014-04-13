@@ -96,7 +96,9 @@
             font-style: italic;
         }
         .post_time time, #older, #newer, #main_nav a {
-            text-rendering: optimizeSpeed; /* small-caps */
+            /* small-caps */
+            text-rendering: optimizeSpeed;
+            -webkit-font-smoothing: antialiased;
         }
         hr {
             border-style: solid;
